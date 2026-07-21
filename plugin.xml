@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="cordova-plugin-native-handoff" version="1.0.0"
+        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>NativeHandoff</name>
+    <description>Writes key-value pairs to NSUserDefaults (iOS) and SharedPreferences (Android) so a successor native app can read them on first launch.</description>
+    <license>MIT</license>
+    <keywords>cordova,ios,android,nsuserdefaults,sharedpreferences,handoff,migration,flutter</keywords>
+    <repo>https://github.com/sflj/cordova-plugin-native-handoff</repo>
+
+    <engines>
+        <engine name="cordova" version=">=9.0.0" />
+        <engine name="cordova-ios" version=">=6.0.0" />
+        <engine name="cordova-android" version=">=10.0.0" />
+    </engines>
+
+    <!--
+        ANDROID_PREFS_FILE: name of the SharedPreferences file.
+        Set this to match what your Flutter app reads from.
+        Default: "native_handoff"
+    -->
+    <preference name="ANDROID_PREFS_FILE" default="native_handoff" />
+
+    <js-module src="www/NativeHandoff.js" name="NativeHandoff">
+        <clobbers target="window.NativeHandoff" />
+    </js-module>
+
+    <!-- iOS -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="NativeHandoff">
+                <param name="ios-package" value="NativeHandoff" />
+            </feature>
+        </config-file>
+        <source-file src="src/ios/NativeHandoff.swift" />
+    </platform>
+
+    <!-- Android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="NativeHandoff">
+                <param name="android-package" value="com.plugin.nativehandoff.NativeHandoff" />
+            </feature>
+        </config-file>
+        <config-file target="res/values/strings.xml" parent="/resources">
+            <string name="native_handoff_prefs_file">$ANDROID_PREFS_FILE</string>
+        </config-file>
+        <source-file src="src/android/NativeHandoff.java"
+                     target-dir="src/com/plugin/nativehandoff" />
+    </platform>
+
+</plugin>
