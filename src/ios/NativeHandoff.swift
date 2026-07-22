@@ -29,4 +29,18 @@ class NativeHandoff: CDVPlugin {
         UserDefaults.standard.removeObject(forKey: key)
         commandDelegate.send(CDVPluginResult(status: .ok), callbackId: command.callbackId)
     }
+
+    @objc(get:)
+    func get(_ command: CDVInvokedUrlCommand) {
+        guard let key = command.argument(at: 0) as? String else {
+            commandDelegate.send(
+                CDVPluginResult(status: .error, messageAs: "Invalid arguments: key must be a string"),
+                callbackId: command.callbackId
+            )
+            return
+        }
+        let value = UserDefaults.standard.string(forKey: key)
+        let result = CDVPluginResult(status: .ok, messageAs: value)
+        commandDelegate.send(result, callbackId: command.callbackId)
+    }
 }

@@ -48,6 +48,19 @@ public class NativeHandoff extends CordovaPlugin {
             return true;
         }
 
+        if ("get".equals(action)) {
+            if (args.length() < 1) {
+                callbackContext.error("Invalid arguments: key required");
+                return true;
+            }
+            String key = args.getString(0);
+            SharedPreferences prefs = cordova.getActivity()
+                .getSharedPreferences(getPrefsFileName(), Context.MODE_PRIVATE);
+            String value = prefs.getString(key, null);
+            callbackContext.success(value);
+            return true;
+        }
+
         return false;
     }
 }

@@ -27,6 +27,18 @@ var NativeHandoff = {
             exec(resolve, reject, 'NativeHandoff', 'remove', [key]);
         });
     },
+
+    /**
+     * Read the string value stored under the given key.
+     * Resolves with the string value, or null if the key does not exist.
+     * @param {string} key
+     * @returns {Promise<string | null>}
+     */
+    get: function (key) {
+        return new Promise(function (resolve, reject) {
+            exec(resolve, reject, 'NativeHandoff', 'get', [key]);
+        });
+    },
 };
 
 module.exports = NativeHandoff;
