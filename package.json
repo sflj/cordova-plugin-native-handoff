@@ -1,0 +1,28 @@
+{
+  "name": "cordova-plugin-native-handoff",
+  "version": "1.1.0",
+  "description": "Writes key-value pairs to NSUserDefaults (iOS) and SharedPreferences (Android) for native app handoff.",
+  "cordova": {
+    "id": "cordova-plugin-native-handoff",
+    "platforms": ["ios", "android"]
+  },
+  "keywords": [
+    "cordova",
+    "ios",
+    "android",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android",
+    "nsuserdefaults",
+    "sharedpreferences",
+    "handoff",
+    "migration",
+    "flutter"
+  ],
+  "author": "sflj",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sflj/cordova-plugin-native-handoff.git"
+  }
+}
